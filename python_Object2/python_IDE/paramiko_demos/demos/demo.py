@@ -208,6 +208,7 @@ if username == '':
 try:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print "\033[31;32;3mLogin: \033[30;31;1m%s %s %s\033[0m"%(username,hostname,port)
+    print "hostname,user,port",hostname + username + port
     sock.connect((hostname, port))
 except Exception as e:
     print('*** Connect failed: ' + str(e))
