@@ -95,7 +95,7 @@ def posix_shell(chan,username,hostname):
                         print "cmd>>>>>",'                       '.join(aaaa)
                         conn.insert_One('insert into record(user,command,net_ip,unet_ip,log_ip,time,net_time) values(%s,%s,%s,%s,%s,%s,%s)',a)
                         if cmd == "exit":
-                            print "llllllllllllllll"
+                            print "lllllllllllllll大l"
 
                         records = []
                     else:
