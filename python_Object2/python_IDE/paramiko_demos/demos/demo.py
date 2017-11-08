@@ -149,11 +149,8 @@ else:
             ip=re.compile('^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$')
             if ip.match(hostname):
                 print "::::::::",hostname
-                if len(domain_info) > 1:
-                    pass
-                else:
-                    print "IP地址不存在,请重新输入!!!"
-                    break;
+                break
+
             else:
                 print "ip 不合法.请重新输入."
                 # sys.exit(10)

@@ -75,41 +75,53 @@ def posix_shell(chan,username,hostname):
                 x = sys.stdin.read(1)
                 records.append(x)
                 if x == '\r':
-                    print 'your input:',''.join(records)
+                    # print 'your input:',''.join(records)
+                    # print "_____________",records
                     # c_time = time.strftime('%Y-%M-%d %H:%m:%S')
                     c_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                 #    cmd = ''.join(records).replace('\r','\n')
                 #     cmd = ''.join(records).replace('\r','\n')
-                    cmd = ''.join(records).replace('\r',"\n")
-                    cmd = ''.join(cmd).replace('\t'," ")
-                    log = '%s  %s  %s'%(c_time,username,cmd)
+                    cmd = ''.join(records).replace('\r',"")
+                    # cmd = ''.join(cmd).replace('\t'," ")
+                    log = '%s  %s  %s\n'%(c_time,username,cmd)
                     # print len(cmd)
-                    print "CMD:::",cmd
-                    if len(cmd) != 2 or len(cmd) != 1:
+                    # print "CMD:::",cmd
+                    # print len(cmd)
+                    if  0 < len(cmd) < 2:# or len(cmd) != 1:
                         f.write(log)
                         #print mysqlhelp.select_One('select * from t2 where id > %s',1)
                         #conn.select_One()
                         #a=(c_time,username,cmd,hostname)
-                        a=(username,str(cmd).split(" "),hostname,'','client_IP',c_time,'client_time')
-                        #print a
-                        aaaa=str(cmd).split(" ")
-                        print type(aaaa)
-                        print "cmd>>>>>",'                       '.join(aaaa)
+                        a=(username,str(cmd),hostname,'','client_IP',c_time,'client_time')
+                        print "a___",str(cmd)
+
                         conn.insert_One('insert into record(user,command,net_ip,unet_ip,log_ip,time,net_time) values(%s,%s,%s,%s,%s,%s,%s)',a)
-                        if cmd == "exit":
-                            print "lllllllllllllll大l"
+                        # if cmd == "exit":
+                        #     print "lllllllllllllll大l"
 
                         records = []
+                    elif len(cmd) == 0:
+                        cmd = ''.join(records).replace('\r',"==Enter==")
+                        # cmd = cmd.replace('\r',"==Enter==")
+                        log = '%s  %s  %s\n'%(c_time,username,cmd)
+                        f.write(log)
+                        # print "len(cmd)",cmd
+                        a=(username,str(cmd),hostname,'','client_IP',c_time,'client_time')
+                        # print cmd
+                        conn.insert_One('insert into record(user,command,net_ip,unet_ip,log_ip,time,net_time) values(%s,%s,%s,%s,%s,%s,%s)',a)
+                        records = []
                     else:
-                        pass
-                    #    print "kong kong "
-                    #    cmd = cmd.replace('\n',"Enter\n")
-                    #    log = '%s  %s  %s'%(c_time,username,cmd)
-                    #    f.write(log)
-                    #    a=(username,cmd,hostname,'','client_IP',c_time,'client_time')
-                    #    print cmd
-                    #    conn.insert_One('insert into record(user,command,net_ip,unet_ip,log_ip,time,net_time) values(%s,%s,%s,%s,%s,%s,%s)',a)
-                    #    records = []
+                       # pass
+                       # print "kong kong "
+                       # cmd = cmd.replace('\n',"==Enter==\n")
+                       # log = '%s  %s  %s\n'%(c_time,username,cmd)
+                       f.write(log)
+                       # a=(username,cmd,hostname,'','client_IP',c_time,'client_time')
+                       # if str(cmd) == "logout":
+                       #     cmd = "logout"
+                       a=(username,str(cmd),hostname,'','client_IP',c_time,'client_time')
+                       conn.insert_One('insert into record(user,command,net_ip,unet_ip,log_ip,time,net_time) values(%s,%s,%s,%s,%s,%s,%s)',a)
+                       records = []
                 #print "x:",x
                 if len(x) == 0:
                     break
