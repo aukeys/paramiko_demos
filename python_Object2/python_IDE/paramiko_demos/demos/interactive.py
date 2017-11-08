@@ -1,3 +1,5 @@
+#!/usr/bin/python
+#-*- Coding: UTF-8 -*-
 # Copyright (C) 2003-2007  Robey Pointer <robeypointer@gmail.com>
 #
 # This file is part of paramiko.
