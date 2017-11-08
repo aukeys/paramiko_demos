@@ -130,7 +130,7 @@ if len(sys.argv) > 1:
 else:
     '''这是把 输入的 domain id 转变成 服务器IP  ssh登录上去'''
 
-    print "====选择登录的服务器===="
+    print "\033[30;31;3m====选择登录的服务器====\033[0m"
 
     #hostname = input('Hostname: ')
 
@@ -140,7 +140,7 @@ else:
         try:
             if len(hostname) == 0:
                 print "hostname is not Null."
-                # exit(1)
+                exit(1)
             re_hostname = re.escape(hostname)
             domain_info = to_json.To_Json()
             # print "domain_info",domain_info
@@ -148,8 +148,12 @@ else:
             import re
             ip=re.compile('^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$')
             if ip.match(hostname):
-                # print "::::::::",hostname
-                break;
+                print "::::::::",hostname
+                if len(domain_info) > 1:
+                    pass
+                else:
+                    print "IP地址不存在,请重新输入!!!"
+                    break;
             else:
                 print "ip 不合法.请重新输入."
                 # sys.exit(10)
@@ -207,15 +211,15 @@ if username == '':
 # now connect
 try:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print "\033[31;32;3mLogin: \033[30;31;1m%s %s %s\033[0m"%(username,hostname,port)
-    print "hostname,user,port",hostname + username + port
+    print "\033[31;32;3mLogin: \033[30;31;1m%s %s %s\033[0m\n"%(username,hostname,port)
+    # print "hostname,user,port%s%s%s"%(hostname,username,port)
     sock.connect((hostname, port))
 except Exception as e:
     print('*** Connect failed: ' + str(e))
     # traceback.print_exc()
     sys.exit(1)
-else:
-    print "重新执行..."
+# else:
+#     print "重新执行..."
 
 
 try:
