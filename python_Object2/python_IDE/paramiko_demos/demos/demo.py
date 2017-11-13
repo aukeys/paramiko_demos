@@ -153,7 +153,7 @@ else:
 
             else:
                 print "ip 不合法.请重新输入."
-                # sys.exit(10)
+                ## sys.exit(10)
 
 
         except Exception as e:
